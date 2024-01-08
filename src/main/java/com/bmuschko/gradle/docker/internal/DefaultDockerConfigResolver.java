@@ -1,10 +1,8 @@
 package com.bmuschko.gradle.docker.internal;
 
-import org.gradle.api.logging.Logger;
-import org.gradle.api.logging.Logging;
+import java.io.File;
 
 import javax.annotation.Nullable;
-import java.io.File;
 
 public class DefaultDockerConfigResolver implements DockerConfigResolver {
     @Nullable

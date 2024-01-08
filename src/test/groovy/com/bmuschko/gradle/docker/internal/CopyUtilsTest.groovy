@@ -161,10 +161,10 @@ class CopyUtilsTest extends Specification {
         if (!Files.exists(path)) {
             return []
         }
-        try (Stream<Path> stream = Files.walk(path)) {
-            return stream.filter { !Files.isDirectory(it) }
-                .map { path.relativize(it) }
-                .collect(Collectors.toList())
+        
+        return Files.walk(path).with {
+            map { path.relativize(it)}
+            collect { Collectors.toList() }
         }
     }
 }

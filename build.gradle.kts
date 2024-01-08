@@ -3,6 +3,7 @@ import java.util.Date
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
+	eclipse
     groovy
     `java-gradle-plugin`
     alias(libs.plugins.plugin.publish)
@@ -39,8 +40,8 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks.named<Jar>("jar") {
@@ -55,32 +56,24 @@ tasks.named<Jar>("jar") {
 }
 
 gradlePlugin {
+    website.set("https://github.com/bmuschko/gradle-docker-plugin")
+    vcsUrl.set("https://github.com/bmuschko/gradle-docker-plugin")
     plugins {
         create("docker-remote-api") {
             id = "com.bmuschko.docker-remote-api"
             displayName = "Gradle Docker Remote API Plugin"
             description = "Plugin that provides tasks for interacting with Docker via its remote API."
             implementationClass = "com.bmuschko.gradle.docker.DockerRemoteApiPlugin"
+            tags.set(listOf("docker", "container", "image", "lightweight", "vm", "linux"))
         }
         create("docker-java-application") {
             id = "com.bmuschko.docker-java-application"
             displayName = "Gradle Docker Java Application Plugin"
             description = "Plugin that provides conventions for building and publishing Docker images for Java applications."
             implementationClass = "com.bmuschko.gradle.docker.DockerJavaApplicationPlugin"
-        }
-        create("docker-spring-boot-application") {
-            id = "com.bmuschko.docker-spring-boot-application"
-            displayName = "Gradle Docker Spring Boot Application Plugin"
-            description = "Plugin that provides conventions for building and publishing Docker images for Spring Boot applications."
-            implementationClass = "com.bmuschko.gradle.docker.DockerSpringBootApplicationPlugin"
+            tags.set(listOf("docker", "container", "image", "lightweight", "vm", "linux"))
         }
     }
-}
-
-pluginBundle {
-    website = "https://github.com/bmuschko/gradle-docker-plugin"
-    vcsUrl = "https://github.com/bmuschko/gradle-docker-plugin"
-    tags = listOf("docker", "container", "image", "lightweight", "vm", "linux")
 }
 
 buildScan {
